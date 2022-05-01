@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import scipy as sp
+import time
+start = time.process_time()
+
+
+#collatz conjucture
+# if no. is odd then 3x+1, if no. is even then x//2
+#keep going until number reaches 4 2 1 sequence loop
+
+seed= []
+total_steps = []
+
+def collatz (num):
+  count = 0
+  start_num = num
+  seed.append(num)
+  while num != 1:
+    if num % 2 == 0:
+      num = num // 2
+    else:
+      num = (num * 3) + 1
+    count += 1
+    #print (num)
+  total_steps.append(count)
+  print(f"It took the number {start_num}, {count} step(s) to reach 1!")
+  
+def limit ():
+  for i in range (1, 51):
+    collatz(i)
+
+limit()
+#plotting graph for the total number of steps needed for each number to reach 1
+plt.plot(seed,total_steps , color = "Blue", marker = "o", linewidth = 1)
+plt.title('Collatz Conjucture; The no. of steps needed to reach 1')
+plt.xlabel('Seed Number')
+plt.ylabel('Number of steps')
+plt.show()
+
+print(time.process_time() - start)
